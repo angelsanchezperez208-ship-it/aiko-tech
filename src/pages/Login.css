@@ -1,0 +1,165 @@
+.contenedor-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.formulario-login {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 450px;
+}
+
+.formulario-login h2 {
+  margin-top: 0;
+  color: #0f172a;
+  text-align: center;
+}
+
+.subtitulo-login {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.error-alerta {
+  background-color: #fee2e2;
+  color: #ef4444;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #fca5a5;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.grupo-input {
+  margin-bottom: 20px;
+}
+
+.grupo-input label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #475569;
+}
+
+.grupo-input input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Súper importante */
+}
+
+.grupo-input input:focus {
+  border-color: #00ffcc;
+  outline: none;
+}
+
+.acciones-login {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-principal {
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-principal:hover {
+  background-color: #00ffcc;
+  color: #0f172a;
+}
+
+.btn-secundario {
+  background-color: white;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secundario:hover {
+  background-color: #f1f5f9;
+  border-color: #0f172a;
+}
+
+/* Nuevo CSS para el Registro y Google */
+.grupo-input-doble {
+  display: flex;
+  gap: 15px;
+}
+
+.grupo-input-doble .grupo-input {
+  flex: 1;
+}
+
+.separador {
+  text-align: center;
+  color: #94a3b8;
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: white;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-google img {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-google:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.link-alterno {
+  text-align: center;
+  margin-top: 25px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.link-alterno a {
+  color: #00ffcc; /* O el color principal de tu marca */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link-alterno a:hover {
+  text-decoration: underline;
+}

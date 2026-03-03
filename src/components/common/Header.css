@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  /* Borramos el justify-content: space-between; */
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #0f172a; /* Un azul marino/negro mucho más tecnológico */
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Una pequeña sombra elegante */
+}
+
+.header a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.header a:hover {
+  color: #00ffcc;
+}
+
+.logo h2 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  margin-left: 50px; /* Esto empuja el menú un poco a la derecha para separarlo del logo */
+}
+
+.link-destacado {
+  border-bottom: 2px solid #00ffcc;
+}
+
+.user-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-left: auto; /* ¡La magia! Esto empuja los botones hasta el extremo derecho de la pantalla */
+}
+
+.btn-login, .btn-carrito {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+}
+
+.btn-login:hover, .btn-carrito:hover {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}

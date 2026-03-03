@@ -1,0 +1,215 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.7); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima del menú de navegación */
+  backdrop-filter: blur(4px); /* Efecto cristal */
+}
+
+.modal-contenido {
+  background-color: white;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: deslizarArriba 0.3s ease-out;
+}
+
+@keyframes deslizarArriba {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-cerrar-modal:hover {
+  color: #ef4444;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.modal-imagen-contenedor {
+  display: flex;
+  justify-content: center;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.modal-imagen-contenedor img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.modal-marca {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-modelo {
+  font-size: 2rem;
+  color: #0f172a;
+  margin: 10px 0;
+}
+
+.modal-titulo {
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.modal-detalles {
+  background-color: #f1f5f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.detalle-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.detalle-item:last-child {
+  margin-bottom: 0;
+}
+
+.stock-disponible { color: #008066; }
+.stock-agotado { color: #ef4444; }
+
+.modal-compra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.modal-precio {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+.btn-agregar-modal {
+  background-color: #00ffcc;
+  color: #0f172a;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-agregar-modal:hover {
+  background-color: #00ccaa;
+  transform: scale(1.05);
+}
+
+/* Responsividad para celulares */
+@media (max-width: 768px) {
+  .modal-grid { grid-template-columns: 1fr; gap: 20px; }
+  .modal-contenido { padding: 25px; height: 90vh; overflow-y: auto; }
+  .modal-compra { flex-direction: column; gap: 15px; }
+  .btn-agregar-modal { width: 100%; }
+}
+
+/* Estilos para el contador del Modal */
+.control-cantidad-modal {
+  display: flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+}
+
+.control-cantidad-modal button {
+  background-color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #0f172a;
+  transition: background-color 0.2s;
+}
+
+.control-cantidad-modal button:hover:not(:disabled) {
+  background-color: #e2e8f0;
+}
+
+.control-cantidad-modal button:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.control-cantidad-modal span {
+  padding: 0 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+/* Mensaje para usuarios no registrados */
+.modal-bloqueado {
+  background-color: #f1f5f9;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #cbd5e1;
+  margin-top: 20px;
+}
+
+.modal-bloqueado p {
+  color: #475569;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.btn-ir-login {
+  display: inline-block;
+  background-color: #0f172a;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-ir-login:hover {
+  background-color: #00ffcc;
+  color: #0f172a;
+}

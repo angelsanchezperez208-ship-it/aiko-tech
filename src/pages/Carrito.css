@@ -1,0 +1,242 @@
+.contenedor-carrito {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
+.titulo-carrito {
+  font-size: 2.5rem;
+  color: #0f172a;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 15px;
+}
+
+/* Estado Vacío */
+.carrito-vacio {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.carrito-vacio p {
+  font-size: 1.2rem;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.btn-volver-tienda {
+  display: inline-block;
+  background-color: #00ffcc;
+  color: #0f172a;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-volver-tienda:hover {
+  background-color: #00ccaa;
+}
+
+/* Layout con productos */
+.carrito-contenido {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Lista más ancha que el resumen */
+  gap: 30px;
+  align-items: start;
+}
+
+/* Lista de Productos */
+.lista-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item-carrito {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  gap: 20px;
+}
+
+.item-imagen {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.item-detalles {
+  flex-grow: 1;
+}
+
+.item-detalles h4 {
+  margin: 0 0 5px 0;
+  color: #0f172a;
+  font-size: 1.1rem;
+}
+
+.item-marca {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.item-precio {
+  margin: 0;
+  color: #475569;
+}
+
+.item-cantidad {
+  background-color: #f1f5f9;
+  padding: 8px 15px;
+  border-radius: 6px;
+}
+
+.item-subtotal {
+  text-align: right;
+  min-width: 120px;
+}
+
+.subtotal-texto {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #008066;
+  margin: 0 0 10px 0;
+}
+
+.btn-eliminar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.2);
+}
+
+/* Resumen de Compra */
+.resumen-compra {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 100px; /* Se queda pegado al hacer scroll */
+}
+
+.resumen-compra h3 {
+  margin-top: 0;
+  color: #0f172a;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: #475569;
+}
+
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+.btn-pagar {
+  width: 100%;
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-pagar:hover {
+  background-color: #00ffcc;
+  color: #0f172a;
+}
+
+.nota-seguridad {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 15px;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 800px) {
+  .carrito-contenido {
+    grid-template-columns: 1fr;
+  }
+  .item-carrito {
+    flex-direction: column;
+    text-align: center;
+  }
+  .item-subtotal {
+    text-align: center;
+  }
+}
+
+/* Estilos para el contador en la lista del Carrito */
+.control-cantidad-carrito {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  margin-right: 20px;
+}
+
+.control-cantidad-carrito button {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #475569;
+}
+
+.control-cantidad-carrito button:hover:not(:disabled) {
+  color: #0f172a;
+  background-color: #f1f5f9;
+}
+
+.control-cantidad-carrito button:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.control-cantidad-carrito span {
+  padding: 0 15px;
+  font-weight: bold;
+  color: #0f172a;
+}

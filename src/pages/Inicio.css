@@ -1,0 +1,80 @@
+/* Estilos para el banner principal (Hero) */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 10%;
+  
+  /* --- ACTUALIZACIÓN AQUÍ --- */
+  /* Combinamos un degradado oscuro con la imagen de fondo */
+  background: linear-gradient(
+      135deg, 
+      rgba(15, 23, 42, 0.95) 0%,   /* Azul marino muy opaco a la izquierda (donde está el texto) */
+      rgba(30, 41, 59, 0.8) 100%    /* Un poco más translúcido a la derecha (para ver las cámaras) */
+    ),
+    /* URL de imagen temporal (Cámaras de seguridad modernas) */
+    url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2000') no-repeat center center;
+  
+  background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+  color: white;
+  /* -------------------------- */
+}
+
+/* Mantén el resto de los estilos (.hero-section h1, .highlight, buttons, etc.) igual */
+.hero-section h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  max-width: 700px;
+}
+
+.hero-section span.highlight {
+  color: #00ffcc; /* Color acento tecnológico */
+}
+
+.hero-section p {
+  font-size: 1.3rem;
+  color: #cbd5e1;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary {
+  background-color: #00ffcc;
+  color: #0f172a;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #00ccaa;
+  transform: translateY(-2px); /* Se levanta un poquito al pasar el mouse */
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #ffffff;
+  color: #0f172a;
+}

@@ -1,0 +1,61 @@
+.tarjeta {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.imagen-contenedor {
+  padding: 20px;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.imagen-contenedor img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.info-tarjeta {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.marca {
+  font-size: 0.8rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.modelo {
+  margin: 5px 0 10px 0;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.descripcion {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Empuja el botón hacia abajo */
+}
+
+.btn-agregar:hover {
+  background-color: #00ffcc;
+  color: #0f172a;
+}
