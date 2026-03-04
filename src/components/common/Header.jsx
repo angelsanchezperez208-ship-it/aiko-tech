@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { CarritoContext } from '../../context/CarritoContext';
-import { AuthContext } from '../../context/AuthContext'; // NUEVO
+import { AuthContext } from '../../context/AuthContext'; 
 import './Header.css';
+
+// 1. Importamos tu logo desde la carpeta assets
+import logoAiko from '../../assets/logo.jpeg'; 
 
 export default function Header() {
   const { carrito } = useContext(CarritoContext);
-  // NUEVO: Leemos si hay un usuario conectado y traemos la función de salir
   const { usuario, cerrarSesion } = useContext(AuthContext);
 
   const cantidadTotal = carrito.reduce((total, item) => total + item.cantidad, 0);
@@ -14,7 +16,10 @@ export default function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/"><h2>AIKO tech</h2></Link>
+        {/* 2. Reemplazamos el texto H2 por tu imagen */}
+        <Link to="/">
+          <img src={logoAiko} alt="AIKO tech" className="logo-img" />
+        </Link>
       </div>
 
       <nav className="nav-links">
@@ -25,7 +30,6 @@ export default function Header() {
       </nav>
 
       <div className="user-actions">
-        {/* LÓGICA CONDICIONAL: Si hay usuario mostramos su correo y el carrito. Si no, mostramos Log In */}
         {usuario ? (
           <>
             <span style={{color: '#64748b', fontSize: '0.9rem', marginRight: '15px'}}>

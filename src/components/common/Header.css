@@ -22,8 +22,11 @@
   color: #00ffcc;
 }
 
-.logo h2 {
-  margin: 0;
+.logo-img {
+  height: 45px; /* Ajusta la altura a tu gusto */
+  width: auto;
+  border-radius: 4px; /* Un borde ligeramente redondeado */
+  display: block; /* Quita espacios extra abajo de la imagen */
 }
 
 .nav-links {
