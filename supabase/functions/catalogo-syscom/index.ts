@@ -19,18 +19,16 @@ serve(async (req) => {
       throw new Error("Faltan las credenciales de Syscom en la bóveda.");
     }
 
-    // --- NUEVO: Leer qué categoría pidió React ---
-    let terminoBusqueda = 'camara'; // Categoría por defecto
+    let terminoBusqueda = 'camara'; 
+    let paginaSolicitada = 1; // La "caja" de 60 que queremos de Syscom
+
     try {
       const body = await req.json();
-      if (body.busqueda) {
-        terminoBusqueda = body.busqueda;
+      if (body.busqueda) terminoBusqueda = body.busqueda;
+      if (body.pagina) paginaSolicitada = body.pagina;
+    } catch (_e) {// Ignoramos el error si no mandan un body válido, usamos los valores por defecto
       }
-    } catch (_e) {
-      // Si no enviaron nada, se queda con la categoría por defecto
-    }
 
-    // Pedimos el Token
     const tokenParams = new URLSearchParams({
       client_id: clientId,
       client_secret: clientSecret,
@@ -44,14 +42,10 @@ serve(async (req) => {
     });
 
     const tokenData = await tokenResponse.json();
-    
-    if (!tokenData.access_token) {
-      throw new Error("Syscom no nos dio el gafete de acceso.");
-    }
+    if (!tokenData.access_token) throw new Error("Syscom no nos dio el gafete.");
 
-    // --- NUEVO: Usar el término dinámico en la URL de Syscom ---
-    // Usamos encodeURIComponent por si la búsqueda tiene espacios (ej. "control de acceso")
-    const urlSyscom = `https://developers.syscom.mx/api/v1/productos?busqueda=${encodeURIComponent(terminoBusqueda)}`;
+    // Le pedimos a Syscom la palabra clave y la PÁGINA PROFUNDA exacta
+    const urlSyscom = `https://developers.syscom.mx/api/v1/productos?busqueda=${encodeURIComponent(terminoBusqueda)}&pagina=${paginaSolicitada}`;
     
     const productosResponse = await fetch(urlSyscom, {
       method: 'GET',
@@ -60,16 +54,10 @@ serve(async (req) => {
 
     const productosData = await productosResponse.json();
 
-    return new Response(
-      JSON.stringify(productosData),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
-    )
+    return new Response(JSON.stringify(productosData), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Ocurrió un error desconocido";
-    return new Response(
-      JSON.stringify({ error: errorMessage }),
-      { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    )
+    const errorMessage = error instanceof Error ? error.message : "Error desconocido";
+    return new Response(JSON.stringify({ error: errorMessage }), { status: 400, headers: { ...corsHeaders } });
   }
 })
