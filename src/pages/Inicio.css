@@ -1,80 +1,237 @@
-/* Estilos para el banner principal (Hero) */
-.hero-section {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 10%;
-  
-  /* --- ACTUALIZACIÓN AQUÍ --- */
-  /* Combinamos un degradado oscuro con la imagen de fondo */
-  background: linear-gradient(
-      135deg, 
-      rgba(15, 23, 42, 0.95) 0%,   /* Azul marino muy opaco a la izquierda (donde está el texto) */
-      rgba(30, 41, 59, 0.8) 100%    /* Un poco más translúcido a la derecha (para ver las cámaras) */
-    ),
-    /* URL de imagen temporal (Cámaras de seguridad modernas) */
-    url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2000') no-repeat center center;
-  
-  background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+/* Variables de color inspiradas en el logo de AIKO tech */
+:root {
+  --aiko-cyan: #4DD0E1;
+  --aiko-cyan-oscuro: #00BCD4;
+  --aiko-negro: #0f172a;
+  --aiko-gris: #64748b;
+  --fondo-claro: #f8fafc;
+}
+
+.contenedor-inicio {
+  width: 100%;
+}
+
+/* === SECCIÓN HERO === */
+.hero {
+  background: linear-gradient(135deg, var(--aiko-negro) 0%, #1e293b 100%);
   color: white;
-  /* -------------------------- */
+  padding: 100px 20px;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Mantén el resto de los estilos (.hero-section h1, .highlight, buttons, etc.) igual */
-.hero-section h1 {
-  font-size: 4rem;
+.hero-contenido {
+  max-width: 800px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
   margin-bottom: 20px;
-  line-height: 1.1;
-  max-width: 700px;
+  background: linear-gradient(to right, white, var(--aiko-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.hero-section span.highlight {
-  color: #00ffcc; /* Color acento tecnológico */
-}
-
-.hero-section p {
-  font-size: 1.3rem;
+.hero p {
+  font-size: 1.2rem;
   color: #cbd5e1;
-  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.hero-botones {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-primario, .btn-secundario {
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primario {
+  background-color: var(--aiko-cyan);
+  color: var(--aiko-negro);
+}
+
+.btn-primario:hover {
+  background-color: var(--aiko-cyan-oscuro);
+  transform: translateY(-2px);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: white;
+  border: 2px solid var(--aiko-cyan);
+}
+
+.btn-secundario:hover {
+  background-color: rgba(77, 208, 225, 0.1);
+  transform: translateY(-2px);
+}
+
+/* === SECCIONES GENERALES === */
+.seccion {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.seccion h2 {
+  font-size: 2.5rem;
+  color: var(--aiko-negro);
+  text-align: center;
   margin-bottom: 40px;
 }
 
-.hero-buttons {
+/* === QUIÉNES SOMOS === */
+.nosotros {
+  background-color: white;
+  text-align: center;
+}
+
+.seccion-texto {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.seccion-texto p {
+  font-size: 1.2rem;
+  color: var(--aiko-gris);
+  line-height: 1.8;
+}
+
+/* === SERVICIOS === */
+.servicios {
+  background-color: var(--fondo-claro);
+  max-width: 100%; /* Ocupa todo el ancho */
+  padding: 80px 5%;
+}
+
+.grid-servicios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tarjeta-servicio {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.tarjeta-servicio:hover {
+  transform: translateY(-10px);
+}
+
+.tarjeta-servicio.destacado {
+  border: 2px solid var(--aiko-cyan);
+  position: relative;
+}
+
+.icono-servicio {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.tarjeta-servicio h3 {
+  color: var(--aiko-negro);
+  margin-bottom: 15px;
+}
+
+.tarjeta-servicio p {
+  color: var(--aiko-gris);
+  line-height: 1.6;
+}
+
+/* === CONTACTO === */
+.contacto-contenedor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.contacto-info p {
+  color: var(--aiko-gris);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.datos-contacto {
+  list-style: none;
+  padding: 0;
+}
+
+.datos-contacto li {
+  font-size: 1.1rem;
+  color: var(--aiko-negro);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.formulario-contacto {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
-.btn-primary {
-  background-color: #00ffcc;
-  color: #0f172a;
-  padding: 15px 30px;
-  text-decoration: none;
+.formulario-contacto .grupo-input label {
+  color: var(--aiko-negro);
   font-weight: bold;
+}
+
+.formulario-contacto textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.formulario-contacto textarea:focus {
+  border-color: var(--aiko-cyan);
+  outline: none;
+}
+
+.btn-enviar-contacto {
+  background-color: var(--aiko-negro);
+  color: white;
+  border: none;
+  padding: 15px;
   border-radius: 6px;
   font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #00ccaa;
-  transform: translateY(-2px); /* Se levanta un poquito al pasar el mouse */
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #ffffff;
-  padding: 15px 30px;
-  text-decoration: none;
   font-weight: bold;
-  border: 2px solid #ffffff;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.btn-secondary:hover {
-  background-color: #ffffff;
-  color: #0f172a;
+.btn-enviar-contacto:hover {
+  background-color: var(--aiko-cyan);
+  color: var(--aiko-negro);
+}
+
+/* === RESPONSIVO PARA CELULARES === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .hero-botones { flex-direction: column; }
+  .contacto-contenedor { grid-template-columns: 1fr; padding: 30px; }
 }
