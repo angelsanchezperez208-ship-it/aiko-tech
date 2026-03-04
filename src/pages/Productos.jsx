@@ -28,14 +28,15 @@ export default function Productos() {
     { id: 'control de acceso', nombre: 'Control de Acceso' }
   ];
 
-  // 🧮 LA FÓRMULA MAESTRA: Traduce tu página (ej. Pag 6) a la página de Syscom (Pag 2)
-  const paginaSyscom = Math.ceil((paginaActual * productosPorPagina) / 60) || 1;
+  // 🧮 MATEMÁTICA ELÁSTICA: Calculamos el tamaño del bloque según cuántas cosas busques
+  const terminosDeBusqueda = busquedaActiva !== '' ? [busquedaActiva] : categoriasActivas;
+  const multiplicador = terminosDeBusqueda.length || 1;
+  const itemsPorLote = 60 * multiplicador; // Si son 2 categorías, el lote es de 120
+  
+  const paginaSyscom = Math.ceil((paginaActual * productosPorPagina) / itemsPorLote) || 1;
 
   useEffect(() => {
     const descargarCatalogo = async () => {
-      // 🕵️‍♂️ BÚSQUEDA GLOBAL: Si hay texto, ignoramos los checkboxes y buscamos eso en todo Syscom
-      const terminosDeBusqueda = busquedaActiva !== '' ? [busquedaActiva] : categoriasActivas;
-
       if (terminosDeBusqueda.length === 0) {
         setProductosReales([]); 
         setCargando(false);
@@ -45,34 +46,29 @@ export default function Productos() {
 
       setCargando(true);
       try {
-        let maxPaginasSyscom = 1;
+        let sumaPaginasSyscom = 0; // Sumaremos todas las páginas de todas las categorías
 
         const promesas = terminosDeBusqueda.map(async (termino) => {
-          // El caché ahora recuerda la búsqueda Y la página profunda de Syscom
           const llaveCache = `${termino}-sysPag${paginaSyscom}`;
 
           if (cacheCategorias.current[llaveCache]) {
             const datosCacheados = cacheCategorias.current[llaveCache];
-            if (datosCacheados.paginasSyscom > maxPaginasSyscom) {
-              maxPaginasSyscom = datosCacheados.paginasSyscom;
-            }
+            sumaPaginasSyscom += datosCacheados.paginasSyscom; // Sumamos al caché
             return datosCacheados.productos;
           }
           
           const { data, error } = await supabase.functions.invoke('catalogo-syscom', {
             body: { 
               busqueda: termino,
-              pagina: paginaSyscom // Pedimos la "caja de 60" correcta
+              pagina: paginaSyscom 
             }
           });
           
           if (error) throw error;
-
-          console.log("Respuesta de Syscom para", termino, ":", data);
           
           if (data) {
             const totalPaginasAPI = data.paginas || 1;
-            if (totalPaginasAPI > maxPaginasSyscom) maxPaginasSyscom = totalPaginasAPI;
+            sumaPaginasSyscom += totalPaginasAPI; // Acumulamos las páginas de esta categoría
 
             if (data.productos) {
               cacheCategorias.current[llaveCache] = { 
@@ -87,8 +83,8 @@ export default function Productos() {
 
         const resultados = await Promise.all(promesas);
 
-        // Traducimos las páginas grandotas de Syscom a tus paginitas de 12/24/48
-        const totalProductosGlobal = maxPaginasSyscom * 60;
+        // 📏 Calculamos el TOTAL EXACTO de páginas para tus botones de abajo
+        const totalProductosGlobal = sumaPaginasSyscom * 60;
         setTotalPaginasReact(Math.ceil(totalProductosGlobal / productosPorPagina));
 
         const productosCombinados = resultados.flat();
@@ -110,14 +106,14 @@ export default function Productos() {
       if (prev.includes(idCategoria)) return prev.filter(c => c !== idCategoria);
       return [...prev, idCategoria];
     });
-    setBusquedaActiva(''); // Si tocamos una categoría, limpiamos la búsqueda manual
+    setBusquedaActiva(''); 
     setTextoInput('');
     setPaginaActual(1);
   };
 
   const ejecutarBusqueda = () => {
     setBusquedaActiva(textoInput.toLowerCase());
-    setCategoriasActivas([]); // Desmarcamos los checkboxes para evitar confusiones visuales
+    setCategoriasActivas([]); 
     setPaginaActual(1);
   };
 
@@ -132,8 +128,8 @@ export default function Productos() {
     productosFiltrados.sort((a, b) => parseFloat(b.precios?.precio_especial || 0) - parseFloat(a.precios?.precio_especial || 0));
   }
 
-  // ✂️ TIJERA MILIMÉTRICA: Saca exactamente tus 12 tarjetas DENTRO de la caja de 60
-  const indiceInicioLocal = ((paginaActual - 1) * productosPorPagina) % 60;
+  // ✂️ TIJERA ELÁSTICA: Corta usando el tamaño de lote dinámico (60, 120, 180...)
+  const indiceInicioLocal = ((paginaActual - 1) * productosPorPagina) % itemsPorLote;
   const indiceFinLocal = indiceInicioLocal + productosPorPagina;
   
   const productosPaginados = productosFiltrados.slice(indiceInicioLocal, indiceFinLocal);
