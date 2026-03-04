@@ -56,3 +56,37 @@
   background-color: #ffffff;
   color: #1a1a1a;
 }
+
+/* === RESPONSIVO PARA CELULARES (HEADER) === */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Apila el logo, los links y los botones hacia abajo */
+    padding: 15px 10px;
+    gap: 15px;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap; /* Si los links no caben, los pasa a la línea de abajo */
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem; /* Letra un poco más chica para que quepa mejor */
+  }
+
+  .user-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  /* Ajustamos el tamaño de los botones para móvil */
+  .btn-login, .btn-carrito {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
