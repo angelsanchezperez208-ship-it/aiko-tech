@@ -33,8 +33,14 @@ export default function Login() {
     setCargando(false);
   };
 
+  // 👇 AQUÍ ESTÁ EL TRUCO NINJA PARA EL LOGIN DUAL 👇
   const loginConGoogle = async () => {
-    await supabase.auth.signInWithOAuth({ provider: 'google' });
+    await supabase.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin // Detecta si estás en localhost o en Netlify automáticamente
+      }
+    });
   };
 
   return (
