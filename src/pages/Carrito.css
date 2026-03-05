@@ -191,6 +191,12 @@
   margin-top: 15px;
 }
 
+.envio-calcular {
+  color: #f59e0b;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 800px) {
   .carrito-contenido {

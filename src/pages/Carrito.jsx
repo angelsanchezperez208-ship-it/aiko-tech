@@ -60,12 +60,12 @@ export default function Carrito() {
           <div className="resumen-compra">
             <h3>Resumen del Pedido</h3>
             <div className="resumen-fila">
-              <span>Subtotal:</span>
+              <span>Subtotal ({carrito.reduce((t, i) => t + i.cantidad, 0)} artículo{carrito.reduce((t, i) => t + i.cantidad, 0) !== 1 ? 's' : ''}):</span>
               <span>${totalPagar.toFixed(2)} USD</span>
             </div>
             <div className="resumen-fila">
               <span>Envío:</span>
-              <span>Por calcular</span>
+              <span className="envio-calcular">Por calcular</span>
             </div>
             <div className="resumen-total">
               <span>Total a Pagar:</span>

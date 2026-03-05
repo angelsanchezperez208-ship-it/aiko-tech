@@ -1,0 +1,428 @@
+.detalle-contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 40px 60px;
+}
+
+.detalle-error {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.detalle-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.detalle-breadcrumb a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.detalle-breadcrumb a:hover { color: #00BCD4; }
+.detalle-breadcrumb span   { color: #cbd5e1; }
+
+/* Layout principal */
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ── COLUMNA IMAGEN ── */
+.detalle-imagen-wrap { position: relative; }
+
+.detalle-imagen-contenedor {
+  background-color: #f8fafc;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 380px;
+  border: 1px solid #e2e8f0;
+}
+
+.detalle-imagen-contenedor img {
+  max-width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  transition: opacity 0.2s;
+}
+
+/* Miniaturas */
+.detalle-miniaturas {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.miniatura {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  transition: border-color 0.2s;
+}
+
+.miniatura:hover { border-color: #00BCD4; }
+
+.miniatura.activa { border-color: #0f172a; }
+
+.miniatura img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.detalle-marca-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #0f172a;
+  color: white;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── COLUMNA INFO ── */
+.detalle-info { padding-top: 10px; }
+
+.detalle-marca-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #00BCD4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.detalle-modelo {
+  font-size: 2.2rem;
+  color: #0f172a;
+  margin: 8px 0 12px;
+  line-height: 1.2;
+}
+
+.detalle-titulo {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ── BLOQUE DE COMPRA ── */
+.detalle-compra {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.detalle-precio-stock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detalle-precio {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+.detalle-precio small {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: normal;
+}
+
+.detalle-stock {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+.en-stock  { background-color: #dcfce7; color: #166534; }
+.sin-stock { background-color: #fee2e2; color: #991b1b; }
+
+/* Controles de cantidad + agregar */
+.detalle-acciones {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.control-cantidad-detalle {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.control-cantidad-detalle button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0f172a;
+  transition: background-color 0.2s;
+}
+
+.control-cantidad-detalle button:hover:not(:disabled) {
+  background-color: #f1f5f9;
+}
+
+.control-cantidad-detalle button:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+.control-cantidad-detalle span {
+  padding: 0 18px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  min-width: 36px;
+  text-align: center;
+}
+
+.btn-agregar-detalle {
+  flex: 1;
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-agregar-detalle:hover:not(:disabled) {
+  background-color: #00ffcc;
+  color: #0f172a;
+}
+
+.btn-agregar-detalle.agregado {
+  background-color: #16a34a;
+  color: white;
+  cursor: default;
+}
+
+/* Datos extra (peso, SKU, garantía) */
+.detalle-datos-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 14px;
+}
+
+.dato-extra { display: flex; flex-direction: column; gap: 3px; }
+
+.dato-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dato-extra span:last-child {
+  font-size: 0.92rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Aviso de login */
+.detalle-aviso-login {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detalle-aviso-login p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.btn-login-detalle {
+  display: inline-block;
+  background-color: #0f172a;
+  color: white;
+  padding: 11px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  align-self: flex-start;
+}
+
+.btn-login-detalle:hover {
+  background-color: #00ffcc;
+  color: #0f172a;
+}
+
+/* ── ESPECIFICACIONES ── */
+
+/* Spinner mientras carga */
+.detalle-cargando-specs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  padding: 10px 0;
+}
+
+.spinner-specs {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #00BCD4;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* Tabla de especificaciones técnicas (datos de la API) */
+.detalle-specs-tabla {
+  margin-top: 4px;
+}
+
+.detalle-specs-tabla h3 {
+  font-size: 1rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.detalle-specs-tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.detalle-specs-tabla tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.detalle-specs-tabla td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+.spec-nombre {
+  color: #64748b;
+  font-weight: 600;
+  width: 45%;
+}
+
+.spec-valor {
+  color: #0f172a;
+}
+
+/* Lista de características (fallback del título) */
+.detalle-specs { margin-top: 4px; }
+
+.detalle-specs h3 {
+  font-size: 1rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.detalle-specs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.detalle-specs li {
+  font-size: 0.9rem;
+  color: #475569;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.spec-icono { color: #00BCD4; font-weight: bold; flex-shrink: 0; }
+
+/* Botones de navegación */
+.btn-regresar {
+  margin-top: 40px;
+  background: none;
+  border: 1px solid #cbd5e1;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.btn-regresar:hover {
+  border-color: #0f172a;
+  color: #0f172a;
+  background-color: #f8fafc;
+}
+
+.btn-volver-catalogo {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #00ffcc;
+  color: #0f172a;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 900px) {
+  .detalle-grid            { grid-template-columns: 1fr; gap: 30px; }
+  .detalle-contenedor      { padding: 20px; }
+  .detalle-modelo          { font-size: 1.7rem; }
+  .detalle-specs ul        { grid-template-columns: 1fr; }
+  .detalle-acciones        { flex-direction: column; }
+  .btn-agregar-detalle     { width: 100%; }
+  .detalle-precio-stock    { flex-direction: column; align-items: flex-start; }
+}

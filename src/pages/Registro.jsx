@@ -47,8 +47,12 @@ export default function Registro() {
   };
 
   const loginConGoogle = async () => {
-    // Esta sola línea invoca la pantalla de Google
-    await supabase.auth.signInWithOAuth({ provider: 'google' });
+    await supabase.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin
+      }
+    });
   };
 
   return (

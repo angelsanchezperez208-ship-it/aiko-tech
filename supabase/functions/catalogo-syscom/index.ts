@@ -19,16 +19,7 @@ serve(async (req) => {
       throw new Error("Faltan las credenciales de Syscom en la bóveda.");
     }
 
-    let terminoBusqueda = 'camara'; 
-    let paginaSolicitada = 1; // La "caja" de 60 que queremos de Syscom
-
-    try {
-      const body = await req.json();
-      if (body.busqueda) terminoBusqueda = body.busqueda;
-      if (body.pagina) paginaSolicitada = body.pagina;
-    } catch (_e) {// Ignoramos el error si no mandan un body válido, usamos los valores por defecto
-      }
-
+    // Obtenemos el token
     const tokenParams = new URLSearchParams({
       client_id: clientId,
       client_secret: clientSecret,
@@ -44,9 +35,30 @@ serve(async (req) => {
     const tokenData = await tokenResponse.json();
     if (!tokenData.access_token) throw new Error("Syscom no nos dio el gafete.");
 
-    // Le pedimos a Syscom la palabra clave y la PÁGINA PROFUNDA exacta
-    const urlSyscom = `https://developers.syscom.mx/api/v1/productos?busqueda=${encodeURIComponent(terminoBusqueda)}&pagina=${paginaSolicitada}`;
-    
+    // Leemos el body para saber qué modo usar
+    let modo = 'catalogo';        // 'catalogo' o 'detalle'
+    let terminoBusqueda = 'camara';
+    let paginaSolicitada = 1;
+    let productoId = null;
+
+    try {
+      const body = await req.json();
+      if (body.modo) modo = body.modo;
+      if (body.busqueda) terminoBusqueda = body.busqueda;
+      if (body.pagina) paginaSolicitada = body.pagina;
+      if (body.producto_id) productoId = body.producto_id;
+    } catch (_e) { /* body vacío, usamos defaults */ }
+
+    let urlSyscom = '';
+
+    if (modo === 'detalle' && productoId) {
+      // Endpoint de detalle individual
+      urlSyscom = `https://developers.syscom.mx/api/v1/productos/${productoId}`;
+    } else {
+      // Endpoint de catálogo (búsqueda paginada)
+      urlSyscom = `https://developers.syscom.mx/api/v1/productos?busqueda=${encodeURIComponent(terminoBusqueda)}&pagina=${paginaSolicitada}`;
+    }
+
     const productosResponse = await fetch(urlSyscom, {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${tokenData.access_token}` }
@@ -54,10 +66,15 @@ serve(async (req) => {
 
     const productosData = await productosResponse.json();
 
-    return new Response(JSON.stringify(productosData), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return new Response(JSON.stringify(productosData), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
+    });
 
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Error desconocido";
-    return new Response(JSON.stringify({ error: errorMessage }), { status: 400, headers: { ...corsHeaders } });
+    return new Response(JSON.stringify({ error: errorMessage }), {
+      status: 400,
+      headers: { ...corsHeaders }
+    });
   }
 })

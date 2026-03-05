@@ -4,12 +4,12 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(15, 23, 42, 0.7); /* Fondo oscuro semitransparente */
+  background-color: rgba(15, 23, 42, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté por encima del menú de navegación */
-  backdrop-filter: blur(4px); /* Efecto cristal */
+  z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
 .modal-contenido {
@@ -25,7 +25,7 @@
 
 @keyframes deslizarArriba {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .btn-cerrar-modal {
@@ -48,7 +48,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
 }
 
 .modal-imagen-contenedor {
@@ -82,37 +82,37 @@
 .modal-titulo {
   color: #475569;
   line-height: 1.6;
-  margin-bottom: 25px;
-}
-
-.modal-detalles {
-  background-color: #f1f5f9;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 25px;
-}
-
-.detalle-item {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 10px;
-  font-size: 1.05rem;
 }
 
-.detalle-item:last-child {
-  margin-bottom: 0;
+/* Botón ver detalle completo */
+.btn-detalle-modal {
+  background: none;
+  border: none;
+  color: #00BCD4;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0 20px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+  display: block;
 }
 
-.stock-disponible { color: #008066; }
-.stock-agotado { color: #ef4444; }
+.btn-detalle-modal:hover {
+  color: #0097a7;
+}
 
+/* Precio + controles de compra */
 .modal-compra {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  padding-top: 20px;
+  padding: 20px 0;
   border-top: 2px solid #e2e8f0;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .modal-precio {
@@ -121,32 +121,12 @@
   color: #0f172a;
 }
 
-.btn-agregar-modal {
-  background-color: #00ffcc;
-  color: #0f172a;
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
+.grupo-controles-compra {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.btn-agregar-modal:hover {
-  background-color: #00ccaa;
-  transform: scale(1.05);
-}
-
-/* Responsividad para celulares */
-@media (max-width: 768px) {
-  .modal-grid { grid-template-columns: 1fr; gap: 20px; }
-  .modal-contenido { padding: 25px; height: 90vh; overflow-y: auto; }
-  .modal-compra { flex-direction: column; gap: 15px; }
-  .btn-agregar-modal { width: 100%; }
-}
-
-/* Estilos para el contador del Modal */
 .control-cantidad-modal {
   display: flex;
   align-items: center;
@@ -182,22 +162,46 @@
   color: #0f172a;
 }
 
-/* Mensaje para usuarios no registrados */
-.modal-bloqueado {
-  background-color: #f1f5f9;
-  padding: 30px;
-  border-radius: 8px;
-  text-align: center;
-  border: 1px solid #cbd5e1;
-  margin-top: 20px;
-}
-
-.modal-bloqueado p {
-  color: #475569;
+.btn-agregar-modal {
+  background-color: #00ffcc;
+  color: #0f172a;
+  border: none;
+  padding: 15px 30px;
   font-size: 1.1rem;
-  margin-bottom: 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
 }
 
+.btn-agregar-modal:hover {
+  background-color: #00ccaa;
+  transform: scale(1.05);
+}
+
+/* Stock y peso (solo con sesión) */
+.modal-detalles {
+  background-color: #f1f5f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.detalle-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.detalle-item:last-child {
+  margin-bottom: 0;
+}
+
+.stock-disponible { color: #008066; }
+.stock-agotado    { color: #ef4444; }
+
+/* Botón login para usuarios sin sesión */
 .btn-ir-login {
   display: inline-block;
   background-color: #0f172a;
@@ -207,9 +211,19 @@
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .btn-ir-login:hover {
   background-color: #00ffcc;
   color: #0f172a;
+}
+
+/* Responsivo para celulares */
+@media (max-width: 768px) {
+  .modal-grid          { grid-template-columns: 1fr; gap: 20px; }
+  .modal-contenido     { padding: 25px; height: 90vh; overflow-y: auto; }
+  .modal-compra        { flex-direction: column; align-items: flex-start; }
+  .btn-agregar-modal   { width: 100%; }
+  .grupo-controles-compra { width: 100%; justify-content: space-between; }
 }

@@ -1,43 +1,63 @@
-import { useState } from 'react'; // Quitamos useContext y CarritoContext
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import ModalProducto from './ModalProducto';
 import './TarjetaProducto.css';
 
 export default function TarjetaProducto({ producto }) {
-  // Estado para controlar el modal
   const [modalAbierto, setModalAbierto] = useState(false);
+  const navigate = useNavigate();
+  const { usuario } = useContext(AuthContext);
 
-  // Tomamos el precio especial directo
   const precioVenta = parseFloat(producto.precios.precio_especial);
+  const stock = producto.existencia?.nuevo ?? producto.existencia ?? 0;
 
-  const tituloCorto = producto.titulo.length > 60 
-    ? producto.titulo.substring(0, 60) + '...' 
+  const tituloCorto = producto.titulo.length > 60
+    ? producto.titulo.substring(0, 60) + '...'
     : producto.titulo;
+
+  const irADetalle = (e) => {
+    e.stopPropagation();
+    navigate(`/productos/${producto.producto_id}`, { state: { producto, precioVenta } });
+  };
 
   return (
     <>
-      {/* Al dar clic en la tarjeta, abrimos el modal */}
-      <div className="tarjeta" onClick={() => setModalAbierto(true)} style={{cursor: 'pointer'}}>
-        
+      <div className="tarjeta" onClick={() => setModalAbierto(true)} style={{ cursor: 'pointer' }}>
+
         <div className="imagen-contenedor">
           <img src={producto.img_portada} alt={producto.modelo} />
         </div>
-        
+
         <div className="info-tarjeta">
           <span className="marca">{producto.marca}</span>
           <h3 className="modelo">{producto.modelo}</h3>
           <p className="descripcion" title={producto.titulo}>{tituloCorto}</p>
-          
-          {/* NUEVO: Ya no hay sección de compra ni precio aquí. 
-              Mantenemos el precioVenta solo para pasárselo al modal */}
+
+          {/* Precio: visible para todos */}
+          <div className="tarjeta-precio-row">
+            <span className="tarjeta-precio">
+              ${precioVenta.toFixed(2)} <small>USD</small>
+            </span>
+            {usuario && (
+              <span className={`tarjeta-stock ${stock > 0 ? 'en-stock' : 'sin-stock'}`}>
+                {stock > 0 ? `✓ ${stock} pzs` : '✗ Agotado'}
+              </span>
+            )}
+          </div>
+
+          <button className="btn-ver-detalle" onClick={irADetalle}>
+            Ver detalle completo →
+          </button>
         </div>
+
       </div>
 
-      {/* Renderizamos el Modal si está abierto */}
       {modalAbierto && (
-        <ModalProducto 
-          producto={producto} 
-          precioVenta={precioVenta} 
-          onClose={() => setModalAbierto(false)} 
+        <ModalProducto
+          producto={producto}
+          precioVenta={precioVenta}
+          onClose={() => setModalAbierto(false)}
         />
       )}
     </>
